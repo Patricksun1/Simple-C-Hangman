@@ -3,17 +3,26 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
+#include <unistd.h>
+
 
 int main() {
     printf("Welcome to Hangman!\n");
-    char guessWords[4][100];
-    printf("Please enter 4 words to guess from\n");
-    for (int i = 0; i < 4; i++) {
-        printf("Enter a word: ");
-        fgets(guessWords[i], 100, stdin);
-    }
+    char guessWords[8][10] = {
+        "generation",
+        "motivation",
+        "discovery",
+        "reasonable",
+        "adventure",
+        "guidelines",
+        "leadership",
+        "connection"
+    };
+    printf("I'm thinking of a word to pick...\n");
+    sleep(4);
 
-    char *selectedWord =  guessWords[rand() % 4];
+    char *selectedWord =  guessWords[rand() % 8];
 
     int numLives = 5;
     int numCorrect = 0;
@@ -22,12 +31,20 @@ int main() {
     for (int i = 0; i < strlen(selectedWord) - 1; i++) {
         guessedWord[i] = '-';
     }
-
-    printf("Starting Game...\n");
+    char response;
+    printf("I have a word...\n");
+    printf("Ready to start game?(y/n)\n");
+    scanf(" %c", &response);
+    if (!(response == 'y' || response == 'Y')) {
+        printf("See you next time!\n");
+        return 0;
+    }
     printf("You have %d lives remaining\n", numLives);
     while (numLives > 0 && numCorrect != (strlen(selectedWord) - 1)) {
         char curr;
         printf("Select a character: ");
+        scanf(" %c", &curr);
+        
         if (curr < 'a' || curr > 'z') {
             printf("Invalid Character\n");
             continue;
