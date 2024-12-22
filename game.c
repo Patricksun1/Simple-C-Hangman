@@ -42,7 +42,7 @@ int main() {
     printf("You have %d lives remaining\n", numLives);
     while (numLives > 0 && numCorrect != (strlen(selectedWord) - 1)) {
         char curr;
-        printf("Select a character: ");
+        printf("Select a character (a - z): ");
         scanf(" %c", &curr);
         
         if (curr < 'a' || curr > 'z') {
