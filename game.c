@@ -21,8 +21,10 @@ int main() {
     };
     printf("I'm thinking of a word to pick...\n");
     sleep(4);
-
-    char *selectedWord =  guessWords[rand() % 8];
+    srand(time(NULL));
+    int index = rand() % 8;
+    printf("%d\n", index);
+    char *selectedWord =  guessWords[index];
 
     int numLives = 5;
     int numCorrect = 0;
